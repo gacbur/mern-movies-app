@@ -1,24 +1,32 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+
+import { BrowserRouter as Router } from 'react-router-dom';
+
 import './App.css';
 
+import Navbar from './layouts/Navbar'
+import Main from './layouts/Main'
+import Footer from './layouts/Footer'
+
+import Sidedrawer from './components/Sidedrawer'
+import Backdrop from './components/Backdrop'
+
 function App() {
+
+  const [sideToggle, setSideToggle] = useState(false)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="app">
+        <div className="app__wrapper">
+          <Navbar show_menu={() => setSideToggle(true)} />
+          <Sidedrawer show={sideToggle} hide_menu={() => setSideToggle(false)} />
+          <Backdrop show={sideToggle} hide_menu={() => setSideToggle(false)} />
+          <Main />
+        </div>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
