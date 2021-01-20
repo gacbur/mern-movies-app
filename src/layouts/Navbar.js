@@ -6,11 +6,10 @@ import './Navbar.css'
 
 import { GiHamburgerMenu } from 'react-icons/gi'
 
-
 const Navbar = ({ show_menu }) => {
     return (
         <div className="navbar">
-            <NavLink className="navbar__logo-link" exact to="/">
+            <NavLink className="navbar__logo-link" to="/" exact>
                 <div className="navbar__logo">
                     <h3>
                         Movies App
@@ -24,13 +23,10 @@ const Navbar = ({ show_menu }) => {
             </button>
             <ul className="navbar__links">
                 <li>
-                    <NavLink exact to="/">Home</NavLink>
-                </li>
-                <li >
-                    <NavLink exact to="/favourites">Favourites</NavLink>
+                    <NavLink to="/favourites">Favourites</NavLink>
                 </li>
                 <li className="logout">
-                    <NavLink exact to="/logout">Logout</NavLink>
+                    <NavLink to="/logout">Logout</NavLink>
                 </li>
             </ul>
         </div >
