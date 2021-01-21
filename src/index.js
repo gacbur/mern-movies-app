@@ -6,14 +6,21 @@ import reportWebVitals from './reportWebVitals';
 
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { combineReducers } from 'redux'
 
 import { applyMiddleware, createStore } from 'redux'
 import { Provider } from 'react-redux'
 
 import { moviesReducer } from './redux/reducers/moviesReducer'
+import { favMoviesReducer } from './redux/reducers/favMoviesReducer'
+
+const reducers = combineReducers({
+  movies: moviesReducer,
+  favMovies: favMoviesReducer
+})
 
 const store = createStore(
-  moviesReducer,
+  reducers,
   composeWithDevTools(applyMiddleware(thunk))
 )
 

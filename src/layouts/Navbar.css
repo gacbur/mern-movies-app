@@ -50,8 +50,15 @@
 
 @media all and (max-width: 768px){
 
+    .navbar__logo{
+        color:black;
+        position: relative;
+        width: 10em;
+        margin-left:2em;
+    }
+
     .navbar__links{
-        visibility: hidden;
+        display: none;
     }
 
     .navbar__hamburger{

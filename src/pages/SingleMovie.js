@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react'
 import Axios from 'axios'
 
-import { BsFillHeartFill } from 'react-icons/bs'
-
 import MainImage from '../components/MainImage'
+import FavoriteBtn from '../components/FavoriteBtn'
 
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -15,8 +14,9 @@ const SingleMovie = (props) => {
 
     const dispatch = useDispatch()
 
+    const singleMovieId = props.match.params.id
+
     useEffect(() => {
-        const singleMovieId = props.match.params.id
 
         Axios.get(`${process.env.REACT_APP_API_URL}movie/${singleMovieId}?api_key=${process.env.REACT_APP_API_KEY}`)
             .then(response => response.data)
@@ -27,12 +27,12 @@ const SingleMovie = (props) => {
             )
     }, [])
 
-    const singleMovie = useSelector(state => state.singleMovie)
-    const singleMovie_loaded = useSelector(state => state.singleMovie_loaded)
+    const singleMovie = useSelector(state => state.movies.singleMovie)
+    const singleMovie_loaded = useSelector(state => state.movies.singleMovie_loaded)
 
     const {
         adult,
-        original_title,
+        title,
         overview,
         original_language,
         poster_path,
@@ -51,8 +51,11 @@ const SingleMovie = (props) => {
                         </div>
                         <div className="single-movie">
                             <div className="single-movie__add-fav">
-                                <h1>{original_title}</h1>
-                                <button>Add to fav <BsFillHeartFill className="add-fav__btn" /></button>
+                                <h1>{title}</h1>
+                                <FavoriteBtn
+                                    movieId={singleMovieId}
+                                    movieInfo={singleMovie}
+                                />
                             </div>
                             <div className="single-movie__full-description">
                                 <div className="full-description__img">

@@ -14,8 +14,8 @@ const LandingPage = () => {
 
     const dispatch = useDispatch()
 
-    const movies = useSelector(state => state.movies)
-    const movies_loaded = useSelector(state => state.movies_loaded)
+    const movies = useSelector(state => state.movies.movies)
+    const movies_loaded = useSelector(state => state.movies.movies_loaded)
     const [currentPage, setCurrentPage] = useState(0)
 
     useEffect(() => {

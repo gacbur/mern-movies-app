@@ -23,7 +23,7 @@ const Navbar = ({ show_menu }) => {
             </button>
             <ul className="navbar__links">
                 <li>
-                    <NavLink to="/favourites">Favourites</NavLink>
+                    <NavLink to="/favorites">Favorites</NavLink>
                 </li>
                 <li className="logout">
                     <NavLink to="/logout">Logout</NavLink>

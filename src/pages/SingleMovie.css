@@ -1,9 +1,4 @@
-*{
-    outline:1px solid red;
-}
-
 .single-movie__main-image{
-    padding: 0em 3em;
     margin-bottom: 7em;
     margin-top:6em;
     display: flex;
@@ -63,7 +58,6 @@
 
 .full-description__img{
     width:35%;
-    
 }
 
 .full-description__img img{
@@ -107,6 +101,7 @@
     
     .full-description__desc{
         width:100%;
+        padding-right: 1.5em;
         padding-top:4em;
     }
     
