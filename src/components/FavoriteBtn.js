@@ -20,7 +20,7 @@ const FavoriteBtn = ({ movieId, movieInfo, }) => {
     }
 
     const handleAddFavMovie = () => {
-        Axios.post('http://localhost:3001/addFavMovie',
+        Axios.post('http://localhost:3001/api/movie/addFavMovie',
             {
                 movieId: movieData.movieId,
                 movieTitle: movieData.movieTitle,
