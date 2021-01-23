@@ -6,3 +6,10 @@ export const addFavMovie = (movie) => (dispatch, getState) => {
         payload: movie
     })
 }
+
+export const updateFavMovies = (id) => (dispatch, getState) => {
+    dispatch({
+        type: actionTypes.UPDATE_FAV_MOVIES,
+        payload: id
+    })
+}

@@ -1,1 +1,2 @@
 export const ADD_FAV_MOVIE = "ADD_FAV_MOVIE"
+export const UPDATE_FAV_MOVIES = "UPDATE_FAV_MOVIES"

@@ -11,6 +11,16 @@ export const favMoviesReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 favMovies: [...state.favMovies, action.payload]
             }
+        case actionTypes.UPDATE_FAV_MOVIES:
+
+            let tempFavMovies = [...state.favMovies]
+
+            tempFavMovies = tempFavMovies.filter(item => item.movieId !== String(action.payload))
+
+            return {
+                ...state,
+                favMovies: tempFavMovies
+            }
         default:
             return state;
     }
