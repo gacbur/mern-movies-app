@@ -3,7 +3,9 @@ const app = express()
 const cors = require('cors')
 const path = require('path')
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
+
 const movie = require("./routes/movie")
+const favorite = require("./routes/favorite")
 
 const mongoose = require('mongoose')
 
@@ -22,6 +24,8 @@ mongoose.connect(`${process.env.DB_PATH}`,
 
 
 app.use('/api/movie', movie)
+app.use('/api/favorite', favorite)
+
 
 
 const PORT = 3001

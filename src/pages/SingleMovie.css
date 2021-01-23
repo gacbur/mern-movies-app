@@ -36,6 +36,11 @@
     border:2px solid rgb(136, 136, 136);
     transition: .3s;
   }
+
+  .single-movie__add-fav button a{
+      text-decoration: none;
+      color:rgb(136, 136, 136);
+  }
   
 .single-movie__add-fav button:hover{
     color:rgb(113, 195, 233);

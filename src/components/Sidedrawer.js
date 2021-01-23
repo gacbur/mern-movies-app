@@ -14,7 +14,7 @@ const Sidedrawer = ({ show, hide_menu }) => {
                     <Link exact to="/">Home</Link>
                 </li>
                 <li>
-                    <Link exact to="/favourites">Favourites <BsFillHeartFill className="sidedrawer__links__heart" /></Link>
+                    <Link exact to="/favorites">Favorites <BsFillHeartFill className="sidedrawer__links__heart" /></Link>
                 </li>
                 <li>
                     <Link exact to="/logout">Logout</Link>

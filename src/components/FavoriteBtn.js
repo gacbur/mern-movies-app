@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import Axios from 'axios'
 
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { addFavMovie, updateFavMovies } from '../redux/actions/favMoviesActions'
+import { addFavMovie, getFavMovies } from '../redux/actions/favMoviesActions'
 
 
 import { BsFillHeartFill } from 'react-icons/bs'
 
 
 const FavoriteBtn = ({ movieId, movieInfo, }) => {
+
+    const favMovies = useSelector(state => state.favMovies.favMovies)
+    const favMovies_loaded = useSelector(state => state.favMovies.favMovies_loaded)
 
     const [inFavorite, setInFavorite] = useState(false)
     const dispatch = useDispatch()
@@ -22,47 +26,76 @@ const FavoriteBtn = ({ movieId, movieInfo, }) => {
     }
 
     useEffect(() => {
-
-        if (inFavorite) {
-            Axios.post('http://localhost:3001/api/movie/addFavMovie',
-                {
-                    movieId: movieData.movieId,
-                    movieTitle: movieData.movieTitle,
-                    movieImage: movieData.movieImage,
-                    MovieRunTime: movieData.MovieRunTime
+        Axios.get('http://localhost:3001/api/movie/getFavMovies')
+            .then((response) => {
+                if (response.status === 200) {
+                    dispatch(getFavMovies(response.data))
+                } else {
+                    console.log('Failed getting favMovies')
                 }
-            ).then((response) => {
-
-                const favMovieItem = {
-                    _id: response.data._id,
-                    movieId: movieData.movieId,
-                    movieTitle: movieData.movieTitle,
-                    movieImage: movieData.movieImage,
-                    MovieRunTime: movieData.MovieRunTime
-                }
-
-                dispatch(addFavMovie(favMovieItem))
-            }).catch(() => {
-                alert('it did not worked')
             })
-        } else if (!inFavorite) {
+    }, [])
 
-            Axios.delete(`http://localhost:3001/api/movie/delete/${movieId}`)
-                .then(response => {
-                    dispatch(updateFavMovies(response.data))
-                }).catch((err) => {
-                    console.log(err)
+    useEffect(() => {
+        if (favMovies_loaded) {
+            if (inFavorite) {
+                Axios.post('http://localhost:3001/api/movie/addFavMovie',
+                    {
+                        movieId: movieData.movieId,
+                        movieTitle: movieData.movieTitle,
+                        movieImage: movieData.movieImage,
+                        MovieRunTime: movieData.MovieRunTime
+                    }
+                ).then((response) => {
+
+                    const favMovieItem = {
+                        _id: response.data._id,
+                        movieId: movieData.movieId,
+                        movieTitle: movieData.movieTitle,
+                        movieImage: movieData.movieImage,
+                        MovieRunTime: movieData.MovieRunTime
+                    }
+
+                    dispatch(addFavMovie(favMovieItem))
+                }).catch(() => {
+                    alert('it did not worked')
                 })
+            }
         }
-
     }, [inFavorite])
 
+
+    const displayButton = () => {
+
+        let isInFav = favMovies.find(item => item.movieId === movieId) ? true : false
+
+        console.log(isInFav)
+
+        if (!isInFav) {
+            return (
+                <>
+                    <button
+                        onClick={() => setInFavorite(prevState => !prevState)}
+                    >Add to Favorite <BsFillHeartFill className="add-fav__btn" /></button>
+                </>
+            )
+        }
+        else {
+            return (
+                <>
+                    <button
+                    >
+                        <Link to="/favorites">
+                            Already in Favorites <BsFillHeartFill className="add-fav__btn" />
+                        </Link>
+                    </button>
+                </>
+            )
+        }
+    }
+
     return (
-        <>
-            <button
-                onClick={() => setInFavorite(prevState => !prevState)}
-            >{inFavorite ? "Delete from favorite" : "Add to favorite"} <BsFillHeartFill className="add-fav__btn" /></button>
-        </>
+        displayButton()
     )
 }
 

@@ -1,7 +1,8 @@
 import * as actionTypes from '../constants/favMovieConstants'
 
 const INITIAL_STATE = {
-    favMovies: []
+    favMovies: [],
+    favMovies_loaded: false
 }
 
 export const favMoviesReducer = (state = INITIAL_STATE, action) => {
@@ -19,7 +20,13 @@ export const favMoviesReducer = (state = INITIAL_STATE, action) => {
 
             return {
                 ...state,
-                favMovies: tempFavMovies
+                favMovies: tempFavMovies,
+            }
+        case actionTypes.GET_FAV_MOVIES:
+            return {
+                ...state,
+                favMovies: action.payload,
+                favMovies_loaded: true
             }
         default:
             return state;
