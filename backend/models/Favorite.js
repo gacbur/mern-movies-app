@@ -13,6 +13,10 @@ const favMovieSchema = new mongoose.Schema({
         type: String,
         require: true
     },
+    moviePoster: {
+        type: String,
+        require: true
+    },
     MovieRunTime: {
         type: Number,
         require: true

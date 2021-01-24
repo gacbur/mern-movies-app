@@ -55,6 +55,7 @@ const SingleMovie = (props) => {
                                 <FavoriteBtn
                                     movieId={singleMovieId}
                                     movieInfo={singleMovie}
+                                    moviePoster={poster_path}
                                 />
                             </div>
                             <div className="single-movie__full-description">

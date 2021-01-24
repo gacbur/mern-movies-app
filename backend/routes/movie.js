@@ -10,6 +10,7 @@ router.post('/addFavMovie', async (req, res) => {
             movieId,
             movieTitle,
             movieImage,
+            moviePoster,
             MovieRunTime
         } = req.body
 
@@ -18,6 +19,7 @@ router.post('/addFavMovie', async (req, res) => {
                 movieId,
                 movieTitle,
                 movieImage,
+                moviePoster,
                 MovieRunTime,
             }
         )

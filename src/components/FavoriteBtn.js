@@ -10,7 +10,7 @@ import { addFavMovie, getFavMovies } from '../redux/actions/favMoviesActions'
 import { BsFillHeartFill } from 'react-icons/bs'
 
 
-const FavoriteBtn = ({ movieId, movieInfo, }) => {
+const FavoriteBtn = ({ movieId, movieInfo, moviePoster }) => {
 
     const favMovies = useSelector(state => state.favMovies.favMovies)
     const favMovies_loaded = useSelector(state => state.favMovies.favMovies_loaded)
@@ -22,6 +22,7 @@ const FavoriteBtn = ({ movieId, movieInfo, }) => {
         movieId: movieId,
         movieTitle: movieInfo.title,
         movieImage: movieInfo.backdrop_path,
+        moviePoster: moviePoster,
         MovieRunTime: movieInfo.runtime,
     }
 
@@ -44,6 +45,7 @@ const FavoriteBtn = ({ movieId, movieInfo, }) => {
                         movieId: movieData.movieId,
                         movieTitle: movieData.movieTitle,
                         movieImage: movieData.movieImage,
+                        moviePoster: movieData.moviePoster,
                         MovieRunTime: movieData.MovieRunTime
                     }
                 ).then((response) => {
@@ -53,6 +55,7 @@ const FavoriteBtn = ({ movieId, movieInfo, }) => {
                         movieId: movieData.movieId,
                         movieTitle: movieData.movieTitle,
                         movieImage: movieData.movieImage,
+                        moviePoster: movieData.moviePoster,
                         MovieRunTime: movieData.MovieRunTime
                     }
 
@@ -68,8 +71,6 @@ const FavoriteBtn = ({ movieId, movieInfo, }) => {
     const displayButton = () => {
 
         let isInFav = favMovies.find(item => item.movieId === movieId) ? true : false
-
-        console.log(isInFav)
 
         if (!isInFav) {
             return (

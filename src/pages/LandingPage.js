@@ -26,7 +26,6 @@ const LandingPage = () => {
     const fetchMovies = (endpoint) => {
         Axios.get(endpoint)
             .then(response => {
-                console.log(response.data.page)
                 dispatch(getMovies(movies, response.data.results))
                 setCurrentPage(response.data.page)
             })

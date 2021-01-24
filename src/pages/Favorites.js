@@ -46,37 +46,36 @@ const Favorites = () => {
             })
     }
 
-    const useStyles = makeStyles({
-        table: {
-            minWidth: 450,
-        },
-    });
-
-    const classes = useStyles();
-
     return (
         <div className="favorites">
             <div className="favorites__content">
                 {favMovies.length > 0 ?
-                    <TableContainer component={Paper}>
-                        <Table className={classes.table} aria-label="simple table">
+                    <TableContainer className="content__table-cnt" component={Paper}>
+                        <Table className="content__table" aria-label="simple table">
                             <TableHead>
-                                <TableRow>
-                                    <TableCell>Movie Name</TableCell>
-                                    <TableCell align="right">Id</TableCell>
-                                    <TableCell align="right">Image</TableCell>
-                                    <TableCell align="right">Action</TableCell>
+                                <TableRow className="content__table-row">
+                                    <TableCell><p>Movie Name</p></TableCell>
+                                    <TableCell align="right"><p>Poster</p></TableCell>
+                                    <TableCell align="right"><p>Action</p></TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
                                 {favMovies.map((item) => (
                                     <TableRow key={item._id}>
                                         <TableCell component="th" scope="row">
-                                            {item.movieTitle}
+                                            <p>{item.movieTitle}</p>
                                         </TableCell>
-                                        <TableCell align="right">{item.movieId}</TableCell>
-                                        <TableCell align="right">{item.movieImage}</TableCell>
-                                        <TableCell align="right"><button onClick={() => handleDeleteFavMovie(item.movieId)}>delete</button></TableCell>
+                                        <TableCell align="right">
+                                            <img
+                                                className="favMovie-table-img"
+                                                src={`${process.env.REACT_APP_IMAGE_URL}w500${item.moviePoster}`}
+                                                alt={item.movieTitle}
+                                            ></img>
+                                        </TableCell>
+                                        <TableCell align="right">
+                                            <button
+                                                className="table__button-del"
+                                                onClick={() => handleDeleteFavMovie(item.movieId)}>Unfavorite</button></TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>
