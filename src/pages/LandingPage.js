@@ -18,6 +18,8 @@ const LandingPage = () => {
     const movies_loaded = useSelector(state => state.movies.movies_loaded)
     const [currentPage, setCurrentPage] = useState(0)
 
+    const [mainImage_index, setMainImage_index] = useState(0)
+
     useEffect(() => {
         const path = `${process.env.REACT_APP_API_URL}movie/popular?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`
         fetchMovies(path)
@@ -37,14 +39,21 @@ const LandingPage = () => {
         fetchMovies(path)
     }
 
+    useEffect(() => {
+        if (movies_loaded) {
+            setMainImage_index(Math.floor(Math.random() * movies.length))
+        }
+
+    }, [movies_loaded])
+
     return (
         <>
             <div className="main-image-cnt">
                 {
                     movies_loaded ? <MainImage
-                        image={`${process.env.REACT_APP_IMAGE_URL}w1280${movies[2].backdrop_path}`}
-                        title={movies[2].original_title}
-                        text={movies[2].overview}
+                        image={`${process.env.REACT_APP_IMAGE_URL}w1280${movies[mainImage_index].backdrop_path}`}
+                        title={movies[mainImage_index].title}
+                        id={movies[mainImage_index].id}
                     /> : null
                 }
             </div>
