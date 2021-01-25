@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 
+import { Link } from 'react-router-dom'
+
 import Axios from 'axios'
 
 import { useDispatch, useSelector } from 'react-redux'
@@ -63,7 +65,7 @@ const Favorites = () => {
                                 {favMovies.map((item) => (
                                     <TableRow key={item._id}>
                                         <TableCell component="th" scope="row">
-                                            <p>{item.movieTitle}</p>
+                                            <Link exact to={`/movie/${item.movieId}`}>{item.movieTitle}</Link>
                                         </TableCell>
                                         <TableCell align="right">
                                             <img

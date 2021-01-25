@@ -26,9 +26,12 @@ const LandingPage = () => {
     }, [])
 
     const fetchMovies = (endpoint) => {
+
         Axios.get(endpoint)
             .then(response => {
-                dispatch(getMovies(movies, response.data.results))
+                let tempMovies = [...movies, ...response.data.results]
+                const originalMovies = [...new Map(tempMovies.map(item => [item['popularity'], item])).values()]
+                dispatch(getMovies(originalMovies))
                 setCurrentPage(response.data.page)
             })
         dispatch(resetSingleMovie())
@@ -44,7 +47,7 @@ const LandingPage = () => {
             setMainImage_index(Math.floor(Math.random() * movies.length))
         }
 
-    }, [movies_loaded])
+    }, [movies_loaded, movies.length])
 
     return (
         <>

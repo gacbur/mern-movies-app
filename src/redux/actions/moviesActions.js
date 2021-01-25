@@ -1,12 +1,9 @@
 import * as actionTypes from '../constants/movieConstants'
 
-export const getMovies = (prevMovies, movies) => (dispatch, getState) => {
+export const getMovies = (movies) => (dispatch, getState) => {
     dispatch({
         type: actionTypes.GET_MOVIES,
-        payload: {
-            movies,
-            prevMovies
-        }
+        payload: movies
     })
 }
 

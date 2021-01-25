@@ -12,7 +12,7 @@ export const moviesReducer = (state = INITIAL_STATE, action) => {
         case actionTypes.GET_MOVIES:
             return {
                 ...state,
-                movies: [...action.payload.prevMovies, ...action.payload.movies],
+                movies: action.payload,
                 movies_loaded: true
             }
         case actionTypes.GET_SINGLE_MOVIE:

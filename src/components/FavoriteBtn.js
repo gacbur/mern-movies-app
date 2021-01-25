@@ -84,12 +84,14 @@ const FavoriteBtn = ({ movieId, movieInfo, moviePoster }) => {
         else {
             return (
                 <>
-                    <button
-                    >
-                        <Link to="/favorites">
+                    <Link to="/favorites">
+                        <button
+                        >
+
                             Already in Favorites <BsFillHeartFill className="add-fav__btn" />
-                        </Link>
-                    </button>
+
+                        </button>
+                    </Link>
                 </>
             )
         }
