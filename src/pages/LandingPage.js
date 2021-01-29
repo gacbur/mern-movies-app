@@ -61,7 +61,7 @@ const LandingPage = () => {
                 }
             </div>
             <div className="landing-page">
-                <h1>Movies</h1>
+                <h1>Popular movies</h1>
                 <div className="landing-page__movies">
                     {
                         movies_loaded

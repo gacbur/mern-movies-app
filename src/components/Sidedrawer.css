@@ -4,13 +4,17 @@
 }
 
 @media all and (max-width:768px){
+
+    .search-bar{
+        display: block;
+    }
     
     .sidedrawer{
         display: flex;
         flex-direction: column;
         width:70%;
         height: 100vh;
-        background-color: white;
+        background-color: rgb(26, 26, 26);
         position: fixed;
         top:0;
         left:0;
@@ -30,15 +34,15 @@
     }
 
     .sidedrawer__links > li:first-child{
-        border-top:1px solid lightgray;
+        border-top:1px solid rgb(58, 58, 58);;
     }
 
     .sidedrawer__links > li > a{
         text-decoration: none;
-        border-bottom: 1px solid lightgray;
+        border-bottom: 1px solid rgb(58, 58, 58);
         display:flex;
         font-weight: 600;
-        color:black;
+        color:white;
         justify-content: center;
         align-items: center;
         height:4em;

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Axios from 'axios'
 
 import MainImage from '../components/MainImage'
@@ -15,6 +15,8 @@ const SingleMovie = (props) => {
     const dispatch = useDispatch()
 
     const singleMovieId = props.match.params.id
+
+    const [ratingColor, setRatingColor] = useState()
 
     useEffect(() => {
 
@@ -40,6 +42,24 @@ const SingleMovie = (props) => {
         status,
         vote_average,
     } = singleMovie
+
+    useEffect(() => {
+        const getRatingColor = () => {
+            if (vote_average > 0 && vote_average <= 2.5) {
+                setRatingColor("#d6544b")
+            }
+            else if (vote_average > 2.5 && vote_average <= 5) {
+                setRatingColor("#ffa929")
+            }
+            else if (vote_average > 5 && vote_average <= 6.8) {
+                setRatingColor("#d4cd55")
+            }
+            else if (vote_average > 6.8 && vote_average <= 10) {
+                setRatingColor("#3ed664")
+            }
+        }
+        getRatingColor()
+    }, [singleMovie_loaded, vote_average])
 
     return (
         <>
@@ -67,7 +87,7 @@ const SingleMovie = (props) => {
                                     <p><strong>Original language: </strong>{original_language}</p>
                                     <p><strong>Release date: </strong>{release_date}</p>
                                     <p><strong>Status: </strong>{status}</p>
-                                    <p><strong>Average Rating: </strong>{vote_average}</p>
+                                    <div className="desc__avg-rating"><p><strong>Average Rating: </strong><div style={{ backgroundColor: ratingColor }} className="avg-rating__icon">{vote_average}</div></p></div>
                                     <p><strong>Genre: </strong>{singleMovie.genres ? singleMovie.genres[0].name : 'no data... Sorry'}</p>
                                     <p><strong>Age: </strong>{adult ? '18+' : 'below 18'}</p>
                                 </div>

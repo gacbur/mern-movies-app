@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 
 import { BsFillHeartFill } from 'react-icons/bs'
 
+import SearchBar from '../components/SearchBar'
+
 import './Sidedrawer.css'
 
 const Sidedrawer = ({ show, hide_menu }) => {
@@ -16,10 +18,8 @@ const Sidedrawer = ({ show, hide_menu }) => {
                 <li>
                     <Link exact to="/favorites">Favorites <BsFillHeartFill className="sidedrawer__links__heart" /></Link>
                 </li>
-                <li>
-                    <Link exact to="/logout">Logout</Link>
-                </li>
             </ul>
+            <SearchBar />
         </div >
     )
 }

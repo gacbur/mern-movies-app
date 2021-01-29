@@ -1,12 +1,27 @@
-import React from 'react'
-
+import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 
-import './Navbar.css'
+import SearchBar from '../components/SearchBar'
 
+import './Navbar.css'
 import { GiHamburgerMenu } from 'react-icons/gi'
 
+// funkcja zwracjaca searchbar jak width - 768
+
 const Navbar = ({ show_menu }) => {
+
+    const showSearchBar = () => {
+        let width = window.innerWidth
+
+        if (width > 768) {
+            return null
+        } else {
+            return <SearchBar />
+        }
+    }
+
+    window.addEventListener('resize', showSearchBar)
+
     return (
         <div className="navbar">
             <NavLink className="navbar__logo-link" to="/" exact>
@@ -25,10 +40,8 @@ const Navbar = ({ show_menu }) => {
                 <li>
                     <NavLink to="/favorites">Favorites</NavLink>
                 </li>
-                <li className="logout">
-                    <NavLink to="/logout">Logout</NavLink>
-                </li>
             </ul>
+            {showSearchBar()}
         </div >
     )
 }

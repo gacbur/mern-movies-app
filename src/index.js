@@ -14,6 +14,9 @@ import { Provider } from 'react-redux'
 import { moviesReducer } from './redux/reducers/moviesReducer'
 import { favMoviesReducer } from './redux/reducers/favMoviesReducer'
 
+import { ThemeProvider } from '@material-ui/core/styles'
+import theme from './material-ui/theme'
+
 const reducers = combineReducers({
   movies: moviesReducer,
   favMovies: favMoviesReducer
@@ -25,11 +28,13 @@ const store = createStore(
 )
 
 ReactDOM.render(
-  <Provider store={store}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </Provider>,
+  <ThemeProvider theme={theme}>
+    <Provider store={store}>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </Provider>
+  </ThemeProvider>,
   document.getElementById('root')
 );
 

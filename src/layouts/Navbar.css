@@ -1,12 +1,12 @@
 .navbar{
-    background-color: white;
-    border-bottom: 1px solid darkgray;
+    background-color: rgb(26, 26, 26);
+    border-bottom: 1px solid rgb(58, 58, 58);
     display: flex;
     align-items: center;
 }
 
 .navbar__logo{
-    color:black;
+    color:white;
     position: relative;
     width: 10em;
     margin-left:3em;
@@ -40,18 +40,28 @@
 }
 
 .navbar__links a{
-    border-left: 1px solid lightgray;
-    border-right: 1px solid lightgray;
+    border-left: 1px solid rgb(58, 58, 58);
+    border-right: 1px solid rgb(58, 58, 58);
     text-decoration: none;
     display: block;
-    color:black;
-    padding:1.4em 2em;
+    color:white;
+    padding:1.8em 2em;
+}
+
+.search-bar{
+    margin-right:65%;
+    margin-left: 2em;
+    display: flex;
 }
 
 @media all and (max-width: 768px){
 
+    .navbar{
+        padding: .5em 0em;
+    }
+
     .navbar__logo{
-        color:black;
+        color:white;
         position: relative;
         width: 10em;
         margin-left:2em;
@@ -64,10 +74,15 @@
     .navbar__hamburger{
         display: flex;
         position: absolute;
-        background-color: white;
+        color:white;
+        background-color: rgb(26, 26, 26);
         border:none;
         padding:.5em .6em;
         font-size: 28px;
         right: 5%;
+    }
+
+    .search-bar{
+        display: none;
     }
 }
