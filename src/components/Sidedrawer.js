@@ -19,7 +19,9 @@ const Sidedrawer = ({ show, hide_menu }) => {
                     <Link exact to="/favorites">Favorites <BsFillHeartFill className="sidedrawer__links__heart" /></Link>
                 </li>
             </ul>
-            <SearchBar />
+            <div className="sidedrawer__search-bar-cnt">
+                <SearchBar width={200} />
+            </div>
         </div >
     )
 }

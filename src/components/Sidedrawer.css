@@ -3,6 +3,12 @@
     display: none;
 }
 
+.sidedrawer__search-bar-cnt{
+    width:100%;
+    display: flex;
+    justify-content: center;
+}
+
 @media all and (max-width:768px){
 
     .search-bar{

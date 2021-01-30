@@ -48,10 +48,14 @@
     padding:1.8em 2em;
 }
 
-.search-bar{
+.links__search-bar-cnt{
     margin-right:65%;
     margin-left: 2em;
     display: flex;
+}
+
+.links__search-bar-cnt.hide{
+    display: none;
 }
 
 @media all and (max-width: 768px){
