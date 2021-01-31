@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { getFavMovies, updateFavMovies } from '../redux/actions/favMoviesActions'
 
-import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -34,7 +33,7 @@ const Favorites = () => {
                     console.log('Failed getting favMovies')
                 }
             })
-    }, [])
+    }, [dispatch])
 
     const handleDeleteFavMovie = (id) => {
         Axios.delete(`http://localhost:3001/api/favorite/delete/${id}`)

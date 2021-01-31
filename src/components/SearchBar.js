@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 
-import { useDispatch } from 'react-redux'
+import Axios from 'axios'
+
+import { useDispatch, useSelector } from 'react-redux'
 
 import { useHistory } from 'react-router-dom'
 
@@ -12,7 +14,6 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import { BsSearch } from 'react-icons/bs'
 
-
 const SearchBar = ({ width }) => {
 
     const [movie, setMovie] = useState('')
@@ -21,20 +22,21 @@ const SearchBar = ({ width }) => {
     const dispatch = useDispatch()
     const history = useHistory()
 
+    const singleMovieCurrentID = useSelector(state => state.movies.singleMovie.id)
+    const singleMovie_loaded = useSelector(state => state.movies.singleMovie_loaded)
+
+
     useEffect(() => {
         if (movie.length > 0) {
             const getSearchingResults = async (movie) => {
 
                 const API = `${process.env.REACT_APP_API_URL}search/movie?api_key=${process.env.REACT_APP_API_KEY}&query=${movie}`
-
                 const response = await fetch(API)
                 const responseJson = await response.json()
                 if (responseJson.results) {
                     setResults(responseJson.results)
                 }
-
             }
-
             getSearchingResults(movie)
         }
     }, [movie])
@@ -64,16 +66,31 @@ const SearchBar = ({ width }) => {
 
     const getMovie = () => {
         const singleMovie = results.filter(item => item.title === movieOption)
-        dispatch(getSingleMovie(...singleMovie))
         const singleMovieID = singleMovie.map(item => item.id)
 
-        history.push(`/movie/${singleMovieID}`)
+
+        Axios.get(`${process.env.REACT_APP_API_URL}movie/${singleMovieID.length > 0 ? singleMovieID : singleMovieCurrentID}?api_key=${process.env.REACT_APP_API_KEY}`)
+            .then(response => response.data)
+            .then(data => {
+                dispatch(getSingleMovie(data))
+            }).catch(err => {
+                console.log(err)
+            })
+
+        if (singleMovie_loaded) {
+            if (singleMovieID.length !== 0) {
+                history.push(`/movie/${singleMovieID}`)
+
+            }
+            else {
+                history.push(`/movie/${singleMovieCurrentID}`)
+            }
+        }
     }
 
     useEffect(() => {
         getMovie()
     }, [movieOption])
-
 
     return (
         <div className="search-bar">

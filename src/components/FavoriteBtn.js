@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import Axios from 'axios'
+import { Link } from 'react-router-dom'
 
 import { useDispatch, useSelector } from 'react-redux'
 
 import { addFavMovie, getFavMovies } from '../redux/actions/favMoviesActions'
-
 
 import { BsFillHeartFill } from 'react-icons/bs'
 
@@ -85,11 +84,8 @@ const FavoriteBtn = ({ movieId, movieInfo, moviePoster }) => {
             return (
                 <>
                     <Link to="/favorites">
-                        <button
-                        >
-
+                        <button>
                             Already in Favorites <BsFillHeartFill className="add-fav__btn" />
-
                         </button>
                     </Link>
                 </>

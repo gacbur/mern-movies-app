@@ -27,7 +27,10 @@ const SingleMovie = (props) => {
             }).catch(err =>
                 console.log("Failed getting single movie item" + err)
             )
-    }, [])
+        // nie do konca potrzebne
+    }, [singleMovieId, dispatch])
+
+
 
     const singleMovie = useSelector(state => state.movies.singleMovie)
     const singleMovie_loaded = useSelector(state => state.movies.singleMovie_loaded)
