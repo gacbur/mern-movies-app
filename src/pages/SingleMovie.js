@@ -3,10 +3,12 @@ import Axios from 'axios'
 
 import MainImage from '../components/MainImage'
 import FavoriteBtn from '../components/FavoriteBtn'
+import SimiliarMovies from '../components/SimiliarMovies'
+import SingleMovieCast from '../components/SingleMovieCast'
 
 import { useDispatch, useSelector } from 'react-redux'
 
-import { getSingleMovie } from '../redux/actions/moviesActions'
+import { getSingleMovie, getSimiliarMovies, getSingleMovieCast } from '../redux/actions/moviesActions'
 
 import './SingleMovie.css'
 
@@ -27,9 +29,24 @@ const SingleMovie = (props) => {
             }).catch(err =>
                 console.log("Failed getting single movie item" + err)
             )
-        // nie do konca potrzebne
-    }, [singleMovieId, dispatch])
 
+        Axios.get(`${process.env.REACT_APP_API_URL}movie/${singleMovieId}/credits?api_key=${process.env.REACT_APP_API_KEY}`)
+            .then(response => response.data)
+            .then(results => {
+                dispatch(getSingleMovieCast(results.cast))
+                console.log(results)
+            }).catch(err =>
+                console.log("Failed getting single movie item" + err)
+            )
+
+        Axios.get(`${process.env.REACT_APP_API_URL}movie/${singleMovieId}/recommendations?api_key=${process.env.REACT_APP_API_KEY}`)
+            .then(response => response.data.results)
+            .then(results => {
+                let tempResults = results
+                tempResults = tempResults.slice(0, 3)
+                dispatch(getSimiliarMovies(tempResults))
+            })
+    }, [singleMovieId, dispatch])
 
 
     const singleMovie = useSelector(state => state.movies.singleMovie)
@@ -95,6 +112,8 @@ const SingleMovie = (props) => {
                                     <p><strong>Age: </strong>{adult ? '18+' : 'below 18'}</p>
                                 </div>
                             </div>
+                            <SingleMovieCast />
+                            <SimiliarMovies />
                         </div>
                     </>
                     :

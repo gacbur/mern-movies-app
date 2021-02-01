@@ -4,7 +4,9 @@ const INITIAL_STATE = {
     movies: [],
     movies_loaded: false,
     singleMovie: {},
+    singleMovie_cast: [],
     singleMovie_loaded: false,
+    similiarMovies: []
 }
 
 export const moviesReducer = (state = INITIAL_STATE, action) => {
@@ -25,6 +27,16 @@ export const moviesReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 singleMovie: {}
+            }
+        case actionTypes.GET_SINGLE_MOVIE_CAST:
+            return {
+                ...state,
+                singleMovie_cast: action.payload
+            }
+        case actionTypes.GET_SIMILIAR_MOVIES:
+            return {
+                ...state,
+                similiarMovies: action.payload
             }
         default:
             return state
