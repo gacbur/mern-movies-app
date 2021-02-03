@@ -13,10 +13,10 @@ const Sidedrawer = ({ show, hide_menu }) => {
         <div className={`sidedrawer ${show ? 'show' : ''}`}>
             <ul className="sidedrawer__links" onClick={hide_menu}>
                 <li>
-                    <Link exact to="/">Home</Link>
+                    <Link to="/">Home</Link>
                 </li>
                 <li>
-                    <Link exact to="/favorites">Favorites <BsFillHeartFill className="sidedrawer__links__heart" /></Link>
+                    <Link to="/favorites">Favorites <BsFillHeartFill className="sidedrawer__links__heart" /></Link>
                 </li>
             </ul>
             <div className="sidedrawer__search-bar-cnt">

@@ -5,17 +5,18 @@ import { Route, Switch } from 'react-router-dom'
 import LandingPage from '../pages/LandingPage'
 import Favorites from '../pages/Favorites'
 import SingleMovie from '../pages/SingleMovie'
-
+import PageNotFound from '../pages/PageNotFound'
 
 const Main = () => {
     return (
-        <Switch>
-            <div>
+        <>
+            <Switch>
                 <Route exact path='/' component={LandingPage} />
-                <Route exact path='/favorites' component={Favorites} />
-                <Route exact path='/movie/:id' component={SingleMovie} />
-            </div>
-        </Switch>
+                <Route path='/favorites' component={Favorites} />
+                <Route path='/movie/:id' component={SingleMovie} />
+                <Route component={PageNotFound} />
+            </Switch>
+        </>
     )
 }
 

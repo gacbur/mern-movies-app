@@ -27,9 +27,12 @@ export const getSimiliarMovies = (movies) => (dispatch, getState) => {
     })
 }
 
-export const getSingleMovieCast = (cast) => (dispatch, getState) => {
+export const getSingleMovieCrewAndCast = (crew, cast) => (dispatch, getState) => {
     dispatch({
-        type: actionTypes.GET_SINGLE_MOVIE_CAST,
-        payload: cast
+        type: actionTypes.GET_SINGLE_MOVIE_CREW_AND_CAST,
+        payload: {
+            crew,
+            cast
+        }
     })
 }

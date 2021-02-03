@@ -64,7 +64,7 @@ const Favorites = () => {
                                 {favMovies.map((item) => (
                                     <TableRow key={item._id}>
                                         <TableCell component="th" scope="row">
-                                            <Link exact to={`/movie/${item.movieId}`}>{item.movieTitle}</Link>
+                                            <Link to={`/movie/${item.movieId}`}>{item.movieTitle}</Link>
                                         </TableCell>
                                         <TableCell align="right">
                                             <img

@@ -5,10 +5,11 @@ import MainImage from '../components/MainImage'
 import FavoriteBtn from '../components/FavoriteBtn'
 import SimiliarMovies from '../components/SimiliarMovies'
 import SingleMovieCast from '../components/SingleMovieCast'
+import SingleMovieCrew from '../components/SingleMovieCrew'
 
 import { useDispatch, useSelector } from 'react-redux'
 
-import { getSingleMovie, getSimiliarMovies, getSingleMovieCast } from '../redux/actions/moviesActions'
+import { getSingleMovie, getSimiliarMovies, getSingleMovieCrewAndCast } from '../redux/actions/moviesActions'
 
 import './SingleMovie.css'
 
@@ -33,8 +34,8 @@ const SingleMovie = (props) => {
         Axios.get(`${process.env.REACT_APP_API_URL}movie/${singleMovieId}/credits?api_key=${process.env.REACT_APP_API_KEY}`)
             .then(response => response.data)
             .then(results => {
-                dispatch(getSingleMovieCast(results.cast))
                 console.log(results)
+                dispatch(getSingleMovieCrewAndCast(results.crew, results.cast))
             }).catch(err =>
                 console.log("Failed getting single movie item" + err)
             )
@@ -46,8 +47,8 @@ const SingleMovie = (props) => {
                 tempResults = tempResults.slice(0, 3)
                 dispatch(getSimiliarMovies(tempResults))
             })
-    }, [singleMovieId, dispatch])
 
+    }, [singleMovieId, dispatch])
 
     const singleMovie = useSelector(state => state.movies.singleMovie)
     const singleMovie_loaded = useSelector(state => state.movies.singleMovie_loaded)
@@ -61,6 +62,8 @@ const SingleMovie = (props) => {
         release_date,
         status,
         vote_average,
+        backdrop_path,
+        genres
     } = singleMovie
 
     useEffect(() => {
@@ -87,7 +90,7 @@ const SingleMovie = (props) => {
                 singleMovie_loaded ?
                     <>
                         <div className="single-movie__main-image">
-                            <MainImage image={`${process.env.REACT_APP_IMAGE_URL}w1280${singleMovie.backdrop_path}`} />
+                            <MainImage image={`${process.env.REACT_APP_IMAGE_URL}w1280${backdrop_path}`} />
                         </div>
                         <div className="single-movie">
                             <div className="single-movie__add-fav">
@@ -100,19 +103,20 @@ const SingleMovie = (props) => {
                             </div>
                             <div className="single-movie__full-description">
                                 <div className="full-description__img">
-                                    <img src={`${process.env.REACT_APP_IMAGE_URL}w500${poster_path}`} alt="" />
+                                    <img src={`${process.env.REACT_APP_IMAGE_URL}w500${poster_path}`} alt={`${title}`} />
                                 </div>
                                 <div className="full-description__desc">
                                     <p><strong>Description: </strong>{overview}</p>
                                     <p><strong>Original language: </strong>{original_language}</p>
                                     <p><strong>Release date: </strong>{release_date}</p>
                                     <p><strong>Status: </strong>{status}</p>
-                                    <div className="desc__avg-rating"><p><strong>Average Rating: </strong><div style={{ backgroundColor: ratingColor }} className="avg-rating__icon">{vote_average}</div></p></div>
-                                    <p><strong>Genre: </strong>{singleMovie.genres ? singleMovie.genres[0].name : 'no data... Sorry'}</p>
+                                    <div className="desc__avg-rating"><span><strong>Average Rating: </strong><div style={{ backgroundColor: ratingColor }} className="avg-rating__icon">{vote_average}</div></span></div>
+                                    <p><strong>Genre: </strong>{genres ? genres[0].name : 'no data... Sorry'}</p>
                                     <p><strong>Age: </strong>{adult ? '18+' : 'below 18'}</p>
                                 </div>
                             </div>
                             <SingleMovieCast />
+                            <SingleMovieCrew />
                             <SimiliarMovies />
                         </div>
                     </>

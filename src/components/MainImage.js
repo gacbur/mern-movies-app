@@ -12,7 +12,7 @@ const MainImage = ({ image, title, id }) => {
             </div>
             {id ?
                 <div className="main-image-title-cnt">
-                    <Link exact to={`/movie/${id}`} className='title-cnt__title'>{title}</Link>
+                    <Link to={`/movie/${id}`} className='title-cnt__title'>{title}</Link>
                 </div>
                 :
                 null

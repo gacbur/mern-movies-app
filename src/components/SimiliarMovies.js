@@ -9,12 +9,6 @@ import './SimiliarMovies.css'
 const SimiliarMovies = () => {
 
     const similiarMovies = useSelector(state => state.movies.similiarMovies)
-    const singleMovie_loaded = useSelector(state => state.movies.singleMovie_loaded)
-
-    if (singleMovie_loaded) {
-
-        console.log(similiarMovies)
-    }
 
     return (
         <div className="similiar-movies">

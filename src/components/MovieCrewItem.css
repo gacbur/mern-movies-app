@@ -1,22 +1,22 @@
-.movie-cast-item{
+.movie-crew-item{
     position: relative;
-    width:150px;
     min-height: 200px;
+    width:150px;
     box-shadow: 0 2px 8px rgba(0,0,0,.3);
     margin:1em;
 }
 
-.movie-cast-item + .movie-cast-item{
+.movie-crew-item + .movie-crew-item{
     margin-left: 1em;
 }
 
-.movie-cast-item img{
+.movie-crew-item img{
     width:100%;    
     display: block;
     min-height: 100%;
 }
 
-.movie-cast-item-overlay{
+.movie-crew-item-overlay{
     opacity: 0;
     transition: .3s;
     left:0;
@@ -33,7 +33,7 @@
     position: absolute;
 }
 
-.movie-cast-item:hover .movie-cast-item-overlay{
+.movie-crew-item:hover .movie-crew-item-overlay{
     background-color: rgba(0,0,0,0.5);
     opacity: 1;
     transition: .3s;

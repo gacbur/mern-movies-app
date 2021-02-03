@@ -98,7 +98,9 @@
     background-color: rgb(26, 26, 26);
 }
 
-.desc__avg-rating p{
+.desc__avg-rating span{
+   font-size: 20px;
+   padding: .2em 0em;
    display: flex;
    align-items: center;
 }
@@ -110,6 +112,11 @@
     width: 2.3em;
     height: 2.3em;
     margin-left: .3em;
+}
+
+.separator{
+    width:100%;
+    padding: 3em 0em;
 }
 
 @media all and (max-width:768px){

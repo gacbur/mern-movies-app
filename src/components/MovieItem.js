@@ -15,4 +15,5 @@ const MovieItem = ({ image, id }) => {
     )
 }
 
+
 export default MovieItem

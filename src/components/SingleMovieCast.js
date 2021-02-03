@@ -21,10 +21,10 @@ const SingleMovieCast = () => {
     }, [cast])
 
     useEffect(() => {
-        if (maxCastLength > 0 && cast.length > maxCastLength + 20) {
+        if (maxCastLength > 0 && cast.length > maxCastLength) {
             setLoadMoreVisible(true)
         }
-        else if (cast.length < maxCastLength + 20) {
+        else if (cast.length < maxCastLength) {
             setLoadMoreVisible(false)
         }
         const initialCast = cast.slice(0, maxCastLength)
@@ -49,7 +49,7 @@ const SingleMovieCast = () => {
                 <h2>Cast ({cast.length})</h2>
                 <div className="movie-cast__content">
                     {currentCast ? currentCast.map(item => (
-                        <MovieCastItem key={item.id} item={item} />
+                        <MovieCastItem key={item.credit_id} item={item} />
                     ))
                         :
                         <h2>Loading...</h2>
@@ -57,7 +57,7 @@ const SingleMovieCast = () => {
                 </div>
                 {<button
                     onClick={() => loadMoreCast()}
-                    className={`${loadMoreVisible ? '' : 'load-more-hide'}`}
+                    className={`load-more ${loadMoreVisible ? '' : 'hide'}`}
 
                 >
                     Load more
