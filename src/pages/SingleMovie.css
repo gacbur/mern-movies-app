@@ -18,6 +18,7 @@
     padding: 2em;
     border-bottom: 1px solid lightgray;
     display: flex;
+    align-items: center;
     width: 90%;
 }
 
@@ -131,11 +132,21 @@
     }
 
     .single-movie__add-fav{
+        display: flex;
+        align-items: center;
         flex-direction: column;
+    }
+
+    .single-movie__add-fav button{
+        width:220px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .single-movie__add-fav h1{
         margin-bottom: 2em;
+        text-align: center;
     }
 
     .full-description__img{

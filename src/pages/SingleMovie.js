@@ -34,7 +34,6 @@ const SingleMovie = (props) => {
         Axios.get(`${process.env.REACT_APP_API_URL}movie/${singleMovieId}/credits?api_key=${process.env.REACT_APP_API_KEY}`)
             .then(response => response.data)
             .then(results => {
-                console.log(results)
                 dispatch(getSingleMovieCrewAndCast(results.crew, results.cast))
             }).catch(err =>
                 console.log("Failed getting single movie item" + err)
@@ -46,7 +45,9 @@ const SingleMovie = (props) => {
                 let tempResults = results
                 tempResults = tempResults.slice(0, 3)
                 dispatch(getSimiliarMovies(tempResults))
-            })
+            }).catch(err =>
+                console.log("Failed getting single movie item" + err)
+            )
 
     }, [singleMovieId, dispatch])
 
@@ -103,7 +104,7 @@ const SingleMovie = (props) => {
                             </div>
                             <div className="single-movie__full-description">
                                 <div className="full-description__img">
-                                    <img src={`${process.env.REACT_APP_IMAGE_URL}w500${poster_path}`} alt={`${title}`} />
+                                    <img src={backdrop_path && `${process.env.REACT_APP_IMAGE_URL}w500${poster_path}`} alt={`${title}`} />
                                 </div>
                                 <div className="full-description__desc">
                                     <p><strong>Description: </strong>{overview}</p>

@@ -77,14 +77,12 @@ const SearchBar = ({ width }) => {
                     console.log(err)
                 })
 
-            if (singleMovie_loaded) {
-                if (singleMovieID.length !== 0) {
-                    history.push(`/movie/${singleMovieID}`)
+            if (singleMovieID.length !== 0) {
+                history.push(`/movie/${singleMovieID}`)
+            }
 
-                }
-                else {
-                    history.push(`/movie/${singleMovieCurrentID}`)
-                }
+            else {
+                history.push(`/movie/${singleMovieCurrentID}`)
             }
         }
     }

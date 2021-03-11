@@ -1,14 +1,17 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 
 import SearchBar from '../components/SearchBar'
 
-import './Navbar.css'
+import { BsFillHeartFill } from 'react-icons/bs'
 import { GiHamburgerMenu } from 'react-icons/gi'
 
-const Navbar = ({ show_menu }) => {
+import './Navbar.css'
+
+const Navbar = () => {
 
     const [show, setShow] = useState()
+    const [sideToggle, setSideToggle] = useState(false)
 
     const navbarEl = useRef(null)
 
@@ -26,29 +29,49 @@ const Navbar = ({ show_menu }) => {
     }, [navbarEl])
 
     return (
-        <div className="navbar" ref={navbarEl}>
-            <NavLink className="navbar__logo-link" to="/" exact>
-                <div className="navbar__logo">
-                    <h3>
-                        Movies App
+        <>
+            <div className="navbar" ref={navbarEl}>
+                <NavLink className="navbar__logo-link" to="/" exact>
+                    <div className="navbar__logo">
+                        <h3>
+                            Movies App
                     </h3>
+                    </div>
+                </NavLink>
+                <button
+                    className="navbar__hamburger"><GiHamburgerMenu
+                        onClick={() => setSideToggle(true)}
+                    />
+                </button>
+                <ul className="navbar__links">
+                    <li>
+                        <NavLink to="/favorites">Favorites</NavLink>
+                    </li>
+                </ul>
+                <div
+                    className={`links__search-bar-cnt ${show ? '' : 'hide'}`}>
+                    <SearchBar width={300} />
                 </div>
-            </NavLink>
-            <button
-                className="navbar__hamburger"><GiHamburgerMenu
-                    onClick={show_menu}
-                />
-            </button>
-            <ul className="navbar__links">
-                <li>
-                    <NavLink to="/favorites">Favorites</NavLink>
-                </li>
-            </ul>
-            <div
-                className={`links__search-bar-cnt ${show ? '' : 'hide'}`}>
-                <SearchBar width={300} />
-            </div>
-        </div >
+            </div >
+            <div className={`sidedrawer ${sideToggle ? 'show' : ''}`}>
+                <ul className="sidedrawer__links" onClick={() => setSideToggle(false)}>
+                    <li>
+                        <Link to="/">Home</Link>
+                    </li>
+                    <li>
+                        <Link to="/favorites">Favorites <BsFillHeartFill className="sidedrawer__links__heart" /></Link>
+                    </li>
+                </ul>
+                <div className="sidedrawer__search-bar-cnt">
+                    <SearchBar width={200} />
+                </div>
+            </div >
+            {sideToggle && <div
+                className="backdrop"
+                onClick={() => setSideToggle(false)}>
+
+            </div>}
+        </>
     )
 }
 
