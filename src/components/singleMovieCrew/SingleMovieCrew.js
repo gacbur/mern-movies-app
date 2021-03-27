@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 import { useSelector } from 'react-redux'
 
-import MovieCrewItem from './MovieCrewItem'
+import MovieCrewItem from '../movieCrewItem/MovieCrewItem'
 
 import './SingleMovieCrew.css'
 

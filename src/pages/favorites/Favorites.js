@@ -6,7 +6,7 @@ import Axios from 'axios'
 
 import { useDispatch, useSelector } from 'react-redux'
 
-import { getFavMovies, updateFavMovies } from '../redux/actions/favMoviesActions'
+import { getFavMovies, updateFavMovies } from '../../redux/actions/favMoviesActions'
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';

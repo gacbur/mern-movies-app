@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 
-import SearchBar from '../components/SearchBar'
+import SearchBar from '../../components/searchBar/SearchBar'
 
 import { BsFillHeartFill } from 'react-icons/bs'
 import { GiHamburgerMenu } from 'react-icons/gi'

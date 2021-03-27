@@ -4,9 +4,9 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 import './App.css';
 
-import Navbar from './layouts/Navbar'
-import Main from './layouts/Main'
-import Footer from './layouts/Footer'
+import Navbar from './layouts/navbar/Navbar'
+import Main from './layouts/main/Main'
+import Footer from './layouts/footer/Footer'
 
 import ScrollToTop from './components/scrollToTop/ScrollToTop'
 

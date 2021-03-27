@@ -2,7 +2,7 @@ import React from 'react'
 
 import { useSelector } from 'react-redux'
 
-import SimiliarMovie from './SimiliarMovie'
+import SimiliarMovie from '../similiarMovie/SimiliarMovie'
 
 import './SimiliarMovies.css'
 

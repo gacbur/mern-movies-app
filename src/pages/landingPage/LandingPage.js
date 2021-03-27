@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import Axios from 'axios'
 
-import MainImage from '../components/MainImage'
-import MovieItem from '../components/MovieItem'
+import MainImage from '../../components/mainImage/MainImage'
+import MovieItem from '../../components/movieItem/MovieItem'
 
-import { getMovies, resetSingleMovie } from '../redux/actions/moviesActions'
+import { getMovies, resetSingleMovie } from '../../redux/actions/moviesActions'
 
 import { useDispatch, useSelector } from 'react-redux'
 

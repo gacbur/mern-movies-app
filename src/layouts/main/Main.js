@@ -2,10 +2,10 @@ import React from 'react'
 
 import { Route, Switch } from 'react-router-dom'
 
-import LandingPage from '../pages/LandingPage'
-import Favorites from '../pages/Favorites'
-import SingleMovie from '../pages/SingleMovie'
-import PageNotFound from '../pages/PageNotFound'
+import LandingPage from '../../pages/landingPage/LandingPage'
+import Favorites from '../../pages/favorites/Favorites'
+import SingleMovie from '../../pages/singleMovie/SingleMovie'
+import PageNotFound from '../../pages/pageNotFound/PageNotFound'
 
 const Main = () => {
     return (

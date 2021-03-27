@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { useHistory } from 'react-router-dom'
 
-import { getSingleMovie } from '../redux/actions/moviesActions'
+import { getSingleMovie } from '../../redux/actions/moviesActions'
 
 import TextField from '@material-ui/core/TextField';
 import { Autocomplete } from '@material-ui/lab';
@@ -118,4 +118,4 @@ const SearchBar = ({ width }) => {
     )
 }
 
-export default SearchBar 
+export default SearchBar

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 import { useDispatch, useSelector } from 'react-redux'
 
-import { addFavMovie, getFavMovies } from '../redux/actions/favMoviesActions'
+import { addFavMovie, getFavMovies } from '../../redux/actions/favMoviesActions'
 
 import { BsFillHeartFill } from 'react-icons/bs'
 

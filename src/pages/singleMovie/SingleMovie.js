@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import Axios from 'axios'
 
-import MainImage from '../components/MainImage'
-import FavoriteBtn from '../components/FavoriteBtn'
-import SimiliarMovies from '../components/SimiliarMovies'
-import SingleMovieCast from '../components/SingleMovieCast'
-import SingleMovieCrew from '../components/SingleMovieCrew'
+import MainImage from '../../components/mainImage/MainImage'
+import FavoriteBtn from '../../components/favoriteBtn/FavoriteBtn'
+import SimiliarMovies from '../../components/similiarMovies/SimiliarMovies'
+import SingleMovieCast from '../../components/singleMovieCast/SingleMovieCast'
+import SingleMovieCrew from '../../components/singleMovieCrew/SingleMovieCrew'
 
 import { useDispatch, useSelector } from 'react-redux'
 
-import { getSingleMovie, getSimiliarMovies, getSingleMovieCrewAndCast } from '../redux/actions/moviesActions'
+import { getSingleMovie, getSimiliarMovies, getSingleMovieCrewAndCast } from '../../redux/actions/moviesActions'
 
 import './SingleMovie.css'
 

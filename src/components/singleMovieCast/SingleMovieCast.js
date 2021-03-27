@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 import { useSelector } from 'react-redux'
 
-import MovieCastItem from './MovieCastItem'
+import MovieCastItem from '../movieCastItem/MovieCastItem'
 
 import './SingleMovieCast.css'
 
