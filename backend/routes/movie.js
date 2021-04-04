@@ -1,7 +1,7 @@
 const express = require("express")
 let router = express.Router()
 
-const favMovie = require('../models/Favorite')
+const favmovies = require('../models/Favorite')
 
 router.post('/addFavMovie', async (req, res) => {
 
@@ -14,7 +14,7 @@ router.post('/addFavMovie', async (req, res) => {
             MovieRunTime
         } = req.body
 
-        const movieItem = new favMovie(
+        const movieItem = new favmovies(
             {
                 movieId,
                 movieTitle,
@@ -33,7 +33,7 @@ router.post('/addFavMovie', async (req, res) => {
 
 router.get('/getFavMovies', async (req, res) => {
 
-    favMovie.find({}, (err, result) => {
+    favmovies.find({}, (err, result) => {
         if (err) {
             res.send(err)
         } else if (result) {

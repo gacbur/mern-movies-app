@@ -23,5 +23,5 @@ const favMovieSchema = new mongoose.Schema({
     }
 })
 
-const favMovie = mongoose.model('favMovie', favMovieSchema)
-module.exports = favMovie
+const favmovies = mongoose.model('favmovies', favMovieSchema)
+module.exports = favmovies
