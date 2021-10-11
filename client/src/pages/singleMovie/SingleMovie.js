@@ -1,59 +1,82 @@
 import React, { useEffect, useState } from 'react'
 import Axios from 'axios'
 
+import { useDispatch, useSelector } from 'react-redux'
+
+import { useHistory } from 'react-router'
+
+import { getSingleMovie, singleMovieLoading, getSimiliarMovies, getSingleMovieGallery, getSingleMovieCrewAndCast } from '../../redux/actions/singleMovieActions'
+import { pickGenres } from '../../redux/actions/genresActions'
+
+import { Element } from 'react-scroll'
+
 import MainImage from '../../components/mainImage/MainImage'
 import FavoriteBtn from '../../components/favoriteBtn/FavoriteBtn'
 import SimiliarMovies from '../../components/similiarMovies/SimiliarMovies'
+import SingleMovieGallery from '../../components/singleMovieGallery/SingleMovieGallery'
 import SingleMovieCast from '../../components/singleMovieCast/SingleMovieCast'
 import SingleMovieCrew from '../../components/singleMovieCrew/SingleMovieCrew'
 import Loading from '../../components/loading/Loading'
-
-import { useDispatch, useSelector } from 'react-redux'
-
-import { getSingleMovie, getSimiliarMovies, getSingleMovieCrewAndCast } from '../../redux/actions/moviesActions'
+import GoUpButton from '../../components/goUpButton/GoUpButton'
 
 import './SingleMovie.css'
 
 const SingleMovie = (props) => {
 
     const dispatch = useDispatch()
+    const history = useHistory()
 
     const singleMovieId = props.match.params.id
 
     const [ratingColor, setRatingColor] = useState()
 
+    const singleMovie = useSelector(state => state.singleMovie.singleMovie)
+    const singleMovie_loading = useSelector(state => state.singleMovie.singleMovie_loading)
+
     useEffect(() => {
 
+        dispatch(singleMovieLoading(true))
         Axios.get(`${process.env.REACT_APP_API_URL}movie/${singleMovieId}?api_key=${process.env.REACT_APP_API_KEY}`)
             .then(response => response.data)
             .then(movieItem => {
                 dispatch(getSingleMovie(movieItem))
+                dispatch(singleMovieLoading(false))
             }).catch(err =>
                 console.log("Failed getting single movie item" + err)
             )
 
+        dispatch(singleMovieLoading(true))
+        Axios.get(`${process.env.REACT_APP_API_URL}/movie/${singleMovieId}/images?api_key=${process.env.REACT_APP_API_KEY}`)
+            .then(response => response.data.backdrops)
+            .then(galleryItems => {
+                dispatch(getSingleMovieGallery(galleryItems))
+                dispatch(singleMovieLoading(false))
+            }).catch(err =>
+                console.log("Failed getting single movie item" + err)
+            )
+
+        dispatch(singleMovieLoading(true))
         Axios.get(`${process.env.REACT_APP_API_URL}movie/${singleMovieId}/credits?api_key=${process.env.REACT_APP_API_KEY}`)
             .then(response => response.data)
             .then(results => {
                 dispatch(getSingleMovieCrewAndCast(results.crew, results.cast))
+                dispatch(singleMovieLoading(false))
             }).catch(err =>
                 console.log("Failed getting single movie item" + err)
             )
 
+        dispatch(singleMovieLoading(true))
         Axios.get(`${process.env.REACT_APP_API_URL}movie/${singleMovieId}/recommendations?api_key=${process.env.REACT_APP_API_KEY}`)
             .then(response => response.data.results)
             .then(results => {
                 let tempResults = results
                 tempResults = tempResults.slice(0, 3)
                 dispatch(getSimiliarMovies(tempResults))
+                dispatch(singleMovieLoading(false))
             }).catch(err =>
                 console.log("Failed getting single movie item" + err)
             )
-
     }, [singleMovieId, dispatch])
-
-    const singleMovie = useSelector(state => state.movies.singleMovie)
-    const singleMovie_loaded = useSelector(state => state.movies.singleMovie_loaded)
 
     const {
         adult,
@@ -84,17 +107,23 @@ const SingleMovie = (props) => {
             }
         }
         getRatingColor()
-    }, [singleMovie_loaded, vote_average])
+    }, [singleMovie_loading, vote_average])
+
+    const handleGoToCategories = async (genreId) => {
+        history.push('/genres')
+        dispatch(pickGenres([genreId]))
+    }
+
 
     return (
         <>
             {
-                singleMovie_loaded ?
+                !singleMovie_loading ?
                     <>
-                        <div className="single-movie__main-image">
-                            <MainImage image={`${process.env.REACT_APP_IMAGE_URL}w1280${backdrop_path}`} />
+                        <div className="single-movie-main-image">
+                            <MainImage image={backdrop_path !== null ? `${process.env.REACT_APP_IMAGE_URL}w1280${backdrop_path}` : '/images/image_not_available.png'} />
                         </div>
-                        <div className="single-movie">
+                        <Element className="single-movie" name="single-movie">
                             <div className="single-movie__add-fav">
                                 <h1>{title}</h1>
                                 <FavoriteBtn
@@ -104,23 +133,40 @@ const SingleMovie = (props) => {
                                 />
                             </div>
                             <div className="single-movie__full-description">
-                                <div className="full-description__img">
-                                    <img src={backdrop_path && `${process.env.REACT_APP_IMAGE_URL}w500${poster_path}`} alt={`${title}`} />
+                                <div className="img">
+                                    <img src={poster_path !== null ? `${process.env.REACT_APP_IMAGE_URL}w500${poster_path}` : '/images/poster_not_available.png'} alt={`${title}`} />
                                 </div>
-                                <div className="full-description__desc">
-                                    <p><strong>Description: </strong>{overview}</p>
+                                {<div className="desc">
+                                    <p><strong>Description: </strong>{overview ? overview : 'no data... Sorry'}</p>
                                     <p><strong>Original language: </strong>{original_language}</p>
                                     <p><strong>Release date: </strong>{release_date}</p>
                                     <p><strong>Status: </strong>{status}</p>
-                                    <div className="desc__avg-rating"><span><strong>Average Rating: </strong><div style={{ backgroundColor: ratingColor }} className="avg-rating__icon">{vote_average}</div></span></div>
-                                    <p><strong>Genre: </strong>{genres ? genres[0].name : 'no data... Sorry'}</p>
+                                    <div className="rating"><span><strong>Average Rating: </strong><div style={{ backgroundColor: ratingColor }} className="rating-icon">{vote_average}</div></span></div>
                                     <p><strong>Age: </strong>{adult ? '18+' : 'below 18'}</p>
-                                </div>
+                                    <div className="genres-wrapper">
+                                        <p>genres:</p>
+                                        {genres ?
+                                            genres.map((genre) => {
+                                                return (
+                                                    <button
+                                                        key={genre.id}
+                                                        onClick={() => handleGoToCategories(genre.id)}
+                                                    >
+                                                        {genre.name}
+                                                    </button>
+                                                )
+                                            }) : <p>'no data... Sorry'</p>}
+                                    </div>
+                                </div>}
                             </div>
+                            <SingleMovieGallery />
                             <SingleMovieCast />
                             <SingleMovieCrew />
                             <SimiliarMovies />
-                        </div>
+                            <GoUpButton
+                                scrollToElementName={'single-movie'}
+                            />
+                        </Element>
                     </>
                     :
                     <div className="single-movie__loading">

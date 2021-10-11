@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AACA,AAAA,aAAa,CAAA;EACX,OAAO,EAAE,IAAI;EACb,WAAW,EAAE,MAAM;EACnB,cAAc,EAAE,MAAM;EACtB,MAAM,EAAC,OAAO;EACd,KAAK,EAAC,IAAI;CAKX;;AAVD,AAOE,aAPW,CAOX,EAAE,CAAA;EACE,UAAU,EAAE,IAAI;CACnB",
+    "sources": [
+        "LandingPage.scss"
+    ],
+    "names": [],
+    "file": "LandingPage.css"
+}

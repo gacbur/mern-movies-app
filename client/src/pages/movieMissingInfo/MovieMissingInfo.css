@@ -1,0 +1,38 @@
+.movie-missing-info {
+  margin-top: 5em;
+  min-height: 500px;
+  color: white;
+  background-color: #1b1b1b;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.movie-missing-info__go-back-btn {
+  margin-top: 2em;
+  cursor: pointer;
+  padding: .5em 1.2em;
+  background-color: #1b1b1b;
+  border: 3px solid white;
+  color: white;
+  font-size: 18px;
+  font-weight: bolder;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.movie-missing-info__go-back-btn:hover {
+  background-color: white;
+  color: black;
+}
+/*# sourceMappingURL=MovieMissingInfo.css.map */
