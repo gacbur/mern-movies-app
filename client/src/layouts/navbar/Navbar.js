@@ -37,8 +37,17 @@ const Navbar = () => {
                 </ul>
                 <div
                     className='links__search-bar-cnt'>
-                    <SearchBar width={325} />
+                    <SearchBar className="search-bar" width={325} />
                 </div>
+                <ul className="navbar__links-login">
+                    <li className="login">
+                        <NavLink to="/login">Log In</NavLink>
+                    </li>
+                    <li className="register">
+                        <NavLink to="/login">Register</NavLink>
+                    </li>
+                </ul>
+
             </div >
             <div className={`sidedrawer ${sideToggle ? 'show' : ''}`}>
                 <ul className="sidedrawer__links" onClick={() => setSideToggle(false)}>
@@ -51,16 +60,24 @@ const Navbar = () => {
                     <li>
                         <Link to="/favorites">Favorites <BsFillHeartFill className="sidedrawer__links__heart" /></Link>
                     </li>
+                    <li>
+                        <NavLink to="/login">Log In</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/login">Register</NavLink>
+                    </li>
                 </ul>
                 <div className="sidedrawer__search-bar-cnt">
                     <SearchBar setSideDrawerShow={setSideToggle} width={200} />
                 </div>
             </div >
-            {sideToggle && <div
-                className="backdrop"
-                onClick={() => setSideToggle(false)}>
+            {
+                sideToggle && <div
+                    className="backdrop"
+                    onClick={() => setSideToggle(false)}>
 
-            </div>}
+                </div>
+            }
         </>
     )
 }
